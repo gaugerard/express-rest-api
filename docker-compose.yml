@@ -6,8 +6,6 @@ services:
         - backend
       ports:
         - "3000:3000"
-      expose:
-        '3000'
   
     web-cli:
       image: sample-express-app
