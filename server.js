@@ -3,12 +3,21 @@ var app = express();
 var bodyParser = require("body-parser");
 var mysql = require("mysql");
 
+var express = require('express');
+var cors = require('cors');
+var app = express();
+
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
+
+app.use(cors());
+
+
 
 // homepage route
 app.get("/", function (req, res) {
@@ -33,12 +42,15 @@ app.listen(3000, function () {
   console.log("Node app is running on port 3000");
 });
 
+
+
 // connect to database
 dbConn.connect();
 
+
 // add a new book
-app.post("/message", function (req, res) {
-    
+app.post("/new/message", function (req, res) {
+      
   let id = req.body.id;
   let content = req.body.content;
   let sender = req.body.sender;
@@ -76,7 +88,11 @@ app.get("/messages", function (req, res) {
       message = "Books table is empty";
     else message = "Successfully retrived all books";
 
-    return res.send({ error: false, data: results, message: message });
+    console.log("got requested.")
+
+    console.log(results);
+    return res.send(results);
+
   });
 });
 
@@ -98,11 +114,10 @@ app.get("/message/:id", function (req, res) {
     if (error) throw error;
 
     // check has data or not
-    let message = "";
     if (results === undefined || results.length == 0)
       message = "Book not found";
     else message = "Successfully retrived book data";
-
-    return res.send({ error: false, data: results[0], message: message });
+    console.log(results[0]);
+    return res.send(results[0]);
   });
 });
