@@ -7,11 +7,6 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
-const config = {
-  name: 'sample-express-app'
-};
-
-
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({

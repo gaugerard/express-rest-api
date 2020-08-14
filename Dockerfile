@@ -1,12 +1,6 @@
-FROM node:12.18.3
-
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-COPY package.json ./
+FROM node:9-slim
+WORKDIR /app
+COPY package.json /app
 RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-CMD ["npm", "run", "start"]
+COPY . /app
+CMD ["npm", "start"]
