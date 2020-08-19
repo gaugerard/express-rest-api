@@ -1,10 +1,21 @@
 var express = require("express");
+
+//routes
+const routes = require("./routes");
+
 var app = express();
 var bodyParser = require("body-parser");
 var mysql = require("mysql");
+var express = require("express");
+var cors = require("cors");
 
-var express = require('express');
-var cors = require('cors');
+//Database
+const db = require("./env/database");
+//Test DB
+db.authenticate()
+  .then(() => console.log("Database connected..."))
+  .catch((err) => console.log("Error: " + err));
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -16,39 +27,35 @@ app.use(
 
 app.use(cors());
 
+//routes
+//app.use("/api", routes);
 
 // homepage route
 app.get("/", function (req, res) {
   return res.send({
-    error: false,
     message: "Welcome to Angular-Rustine CRUD API with Express.js and MySQL",
   });
 });
 
-module.exports = app;
-
-// connection configurations
-var dbConn = mysql.createConnection({
-  host: "vps-538b1440.vps.ovh.net",
-  user: "root",
-  password: "password",
-  database: "rustinerie",
-});
+// User routes
+app.use("/users", require("./routes/users"));
+// Message routes
+app.use("/messages", require("./routes/messages"));
 
 // set port
 app.listen(3000, function () {
   console.log("Node app is running on port 3000");
 });
 
-
+module.exports = app;
 
 // connect to database
-dbConn.connect();
-
+/*dbConn.connect();*/
 
 // add a new book
+
+/*
 app.post("/new/message", function (req, res) {
-      
   let id = req.body.id;
   let content = req.body.content;
   let sender = req.body.sender;
@@ -61,7 +68,7 @@ app.post("/new/message", function (req, res) {
       .send({ error: true, message: "Please provide book name and author" });
 
   // insert to db
-  dbConn.query(
+  db.query(
     "INSERT INTO messages (id, content, sender, receiver) VALUES (?, ?, ?, ?)",
     [id, content, sender, receiver],
     function (error, results, fields) {
@@ -77,7 +84,7 @@ app.post("/new/message", function (req, res) {
 
 // retrieve all books
 app.get("/messages", function (req, res) {
-  dbConn.query("SELECT * FROM messages", function (error, results, fields) {
+  db.query("SELECT * FROM messages", function (error, results, fields) {
     if (error) throw error;
 
     // check has data or not
@@ -86,11 +93,10 @@ app.get("/messages", function (req, res) {
       message = "Books table is empty";
     else message = "Successfully retrived all books";
 
-    console.log("got requested.")
+    console.log("got requested.");
 
     console.log(results);
     return res.send(results);
-
   });
 });
 
@@ -104,7 +110,7 @@ app.get("/message/:id", function (req, res) {
       .send({ error: true, message: "Please provide message id" });
   }
 
-  dbConn.query("SELECT * FROM messages where id=?", id, function (
+  db.query("SELECT * FROM messages where id=?", id, function (
     error,
     results,
     fields
@@ -119,3 +125,6 @@ app.get("/message/:id", function (req, res) {
     return res.send(results[0]);
   });
 });
+
+
+*/

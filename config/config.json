@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "password",
+    "database": "rustinerie",
+    "host": "vps-538b1440.vps.ovh.net",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "password",
+    "database": "rustinerie",
+    "host": "vps-538b1440.vps.ovh.net",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "password",
+    "database": "rustinerie",
+    "host": "vps-538b1440.vps.ovh.net",
+    "dialect": "mysql"
+  }
+}
