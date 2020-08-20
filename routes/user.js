@@ -39,4 +39,26 @@ router.post("/", (req, res) => {
     });
 });
 
+// Used during Login.
+router.post("/login", (req, res) => {
+  const firstname = req.body.username;
+  const password = req.body.password;
+
+  if (!firstname || !password) {
+    return res.status(400).send("Request missing username or password param");
+  }
+
+  models.user
+    .findOne({
+      where: { pseudo: firstname, password: password },
+    })
+    .then(function (user) {
+      if (user) {
+        res.send(user);
+      } else {
+        res.send(user);
+      }
+    });
+});
+
 module.exports = router;
