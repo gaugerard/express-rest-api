@@ -13,17 +13,18 @@ router.get("/", (req, res) =>
     .catch((err) => console.log(err))
 );
 
+// get wipe from its unique id.
 router.get("/:id", (req, res) => {
-    const id = req.params.id;
-    console.log(id);
-    models.wipe
-      .findOne({
-        where: { id: id },
-      })
-      .then(function (wipe) {
-        res.send(wipe);
-      });
-  });
+  const id = req.params.id;
+  console.log(id);
+  models.wipe
+    .findOne({
+      where: { id: id },
+    })
+    .then(function (wipe) {
+      res.send(wipe);
+    });
+});
 
 router.post("/", (req, res) => {
   console.log("creating wipe ...");

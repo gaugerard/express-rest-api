@@ -25,6 +25,18 @@ router.get("/:wipe_id", (req, res) => {
     });
 });
 
+router.get("/user/:user_id", (req, res) => {
+  const user_id = req.params.user_id;
+  console.log(user_id);
+  models.auth_user
+    .findAll({
+      where: { user_id: user_id },
+    })
+    .then(function (auth_user) {
+      res.send(auth_user);
+    });
+});
+
 router.post("/", (req, res) => {
   const id = req.body.id;
   const wipe_id = req.body.wipe_id;
