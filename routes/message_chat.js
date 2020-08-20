@@ -4,7 +4,7 @@ const db = require("../env/database");
 const models = require("../models/index");
 
 router.get("/", (req, res) =>
-  models.messages
+  models.message_chat
     .findAll()
     .then((messages) => {
       res.send(messages);
@@ -15,7 +15,7 @@ router.get("/", (req, res) =>
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   console.log(id);
-  models.messages
+  models.message_chat
     .findOne({
       where: { id: id },
     })
@@ -26,19 +26,22 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   const id = req.body.id;
-  const sender = req.body.sender;
-  const receiver = req.body.receiver;
   const content = req.body.content;
+  const date = req.body.date;
+  const user_src = req.body.user_src;
 
-  models.messages
+  models.message_chat
     .create({
       id: id,
-      sender: sender,
-      receiver: receiver,
       content: content,
+      date: date,
+      user_src: user_src,
     })
     .then((newMessage) => {
       res.json(newMessage);
+    })
+    .catch((err) => {
+      console.log(err), res.sendStatus(400, err);
     });
 });
 

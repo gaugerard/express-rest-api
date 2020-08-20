@@ -2,27 +2,23 @@
 const db = require("../env/database");
 
 module.exports = function(sequelize, DataTypes) {
-  return db.define('WARNING', {
+  return db.define('user', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
-    warning: {
-      type: DataTypes.TEXT,
-      allowNull: true
+    pseudo: {
+      type: DataTypes.STRING(45),
+      allowNull: false
     },
-    website: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    token: {
-      type: DataTypes.TEXT,
-      allowNull: true
+    password: {
+      type: DataTypes.STRING(45),
+      allowNull: false
     }
   }, {
     timestamps: false,
     sequelize,
-    tableName: 'WARNING'
+    tableName: 'user'
   });
 };

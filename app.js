@@ -38,9 +38,20 @@ app.get("/", function (req, res) {
 });
 
 // User routes
-app.use("/users", require("./routes/users"));
+app.use("/user", require("./routes/user"));
 // Message routes
-app.use("/messages", require("./routes/messages"));
+app.use("/message_chat", require("./routes/message_chat"));
+// Stuff routes
+app.use("/stuff", require("./routes/stuff"));
+// Wipe routes
+app.use("/wipe", require("./routes/wipe"));
+// Auth_user routes
+app.use("/auth_user", require("./routes/auth_user"));
+// Auth_user routes
+app.use("/wipe_chat", require("./routes/wipe_chat"));
+// Blueprint routes
+app.use("/blueprint", require("./routes/blueprint"));
+
 
 // set port
 app.listen(3000, function () {
