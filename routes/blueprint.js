@@ -13,6 +13,21 @@ router.get("/", (req, res) =>
     .catch((err) => console.log(err))
 );
 
+//get blueprint by wipe_id
+router.get("/:wipe_id", (req, res) => {
+  const wipe_id = req.params.wipe_id;
+  models.blueprint
+    .findAll({
+      where: { wipe_id: wipe_id },
+    })
+    .then((blueprint) => {
+      console.log("getting blueprint for wipe ...");
+      res.send(blueprint);
+    })
+    .catch((err) => console.log(err));
+});
+
+
 router.post("/", (req, res) => {
   const id = req.body.id;
   const wipe_id = req.body.wipe_id;
@@ -35,19 +50,19 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-    console.log("Deleting ...");
-    const id = req.params.id;
-    console.log(id);
-    models.blueprint
-      .destroy({
-        where: { id: id },
-      })
-      .then((newBP) => {
-        res.json(newBP);
-      })
-      .catch((err) => {
-        console.log(err), res.sendStatus(400, err);
-      });
-  });
+  console.log("Deleting ...");
+  const id = req.params.id;
+  console.log(id);
+  models.blueprint
+    .destroy({
+      where: { id: id },
+    })
+    .then((newBP) => {
+      res.json(newBP);
+    })
+    .catch((err) => {
+      console.log(err), res.sendStatus(400, err);
+    });
+});
 
 module.exports = router;
