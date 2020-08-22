@@ -27,21 +27,20 @@ router.get("/:wipe_id", (req, res) => {
 
 router.post("/", (req, res) => {
     console.log("creating wipe_chat ...");
-    const id = req.body.id;
+    //const id = req.body.id;
     const msg_id = req.body.msg_id;
     const wipe_id = req.body.wipe_id;
-    console.log(id, msg_id, wipe_id);
+    console.log(msg_id, wipe_id);
   
-    if (!id || !msg_id || !wipe_id) {
-      console.log("Request missing id | msg_id | wipe_id param");
+    if (!msg_id || !wipe_id) {
+      console.log("Request missing msg_id | wipe_id param");
       return res
         .status(400)
-        .send("Request missing id | msg_id | wipe_id param");
+        .send("Request missing msg_id | wipe_id param");
     }
   
     models.wipe_chat
       .create({
-        id: id,
         msg_id: msg_id,
         wipe_id: wipe_id,
       })

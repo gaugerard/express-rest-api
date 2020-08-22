@@ -28,23 +28,19 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   console.log("creating wipe ...");
-  const id = req.body.id;
   const server_name = req.body.server_name;
-  const password = req.body.password;
-  console.log(id, server_name, password);
+  console.log(server_name);
 
-  if (!id || !server_name || !password) {
-    console.log("Request missing id | server_name | password param");
+  if (!server_name) {
+    console.log("Request missing server_name param");
     return res
       .status(400)
-      .send("Request missing id | server_name | password param");
+      .send("Request missing server_name param");
   }
 
   models.wipe
     .create({
-      id: id,
-      server_name: server_name,
-      password: password,
+      server_name: server_name
     })
     .then((newWipe) => {
       res.json(newWipe);

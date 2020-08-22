@@ -38,19 +38,20 @@ router.get("/user/:user_id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const id = req.body.id;
+  //const id = req.body.id;
   const wipe_id = req.body.wipe_id;
   const user_id = req.body.user_id;
   console.log(wipe_id, user_id);
 
-  if (!id || !wipe_id || !user_id) {
+  // !id || 
+  if (!wipe_id || !user_id) {
     console.log("Request wipe_id id | user_id param");
     return res.status(400).send("Request wipe_id id | user_id param");
   }
 
   models.auth_user
     .create({
-      id: id,
+      //id: id,
       wipe_id: wipe_id,
       user_id: user_id,
     })

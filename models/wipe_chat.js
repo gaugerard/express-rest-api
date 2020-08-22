@@ -5,6 +5,7 @@ module.exports = function(sequelize, DataTypes) {
   return db.define('wipe_chat', {
     id: {
       type: DataTypes.INTEGER(11),
+      autoIncrement: true,
       allowNull: false,
       primaryKey: true
     },

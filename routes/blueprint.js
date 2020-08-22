@@ -29,14 +29,12 @@ router.get("/:wipe_id", (req, res) => {
 
 
 router.post("/", (req, res) => {
-  const id = req.body.id;
   const wipe_id = req.body.wipe_id;
   const user_id = req.body.user_id;
   const stuff_name = req.body.stuff_name;
 
   models.blueprint
     .create({
-      id: id,
       wipe_id: wipe_id,
       user_id: user_id,
       stuff_name: stuff_name,

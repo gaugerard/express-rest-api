@@ -25,14 +25,12 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const id = req.body.id;
   const content = req.body.content;
   const date = req.body.date;
   const user_src = req.body.user_src;
 
   models.message_chat
     .create({
-      id: id,
       content: content,
       date: date,
       user_src: user_src,

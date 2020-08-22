@@ -15,19 +15,17 @@ router.get("/", (req, res) =>
 
 router.post("/", (req, res) => {
   console.log("creating user ...");
-  const id = req.body.id;
   const pseudo = req.body.pseudo;
   const password = req.body.password;
-  console.log(id, pseudo, password);
+  console.log(pseudo, password);
 
-  if (!password || !password) {
+  if (!pseudo || !password) {
     console.log("Request missing username or password param");
     return res.status(400).send("Request missing username or password param");
   }
 
   models.user
     .create({
-      id: id,
       pseudo: pseudo,
       password: password,
     })
