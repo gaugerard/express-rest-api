@@ -63,13 +63,13 @@ router.post("/", (req, res) => {
     });
 });
 
-router.delete("/:user_id", (req, res) => {
+router.delete("/:auth_id", (req, res) => {
   console.log("Deleting auth to user...");
-  const user_id = req.params.user_id;
-  console.log(user_id);
+  const auth_id = req.params.auth_id;
+  console.log(auth_id);
   models.auth_user
     .destroy({
-      where: { user_id: user_id },
+      where: { id: auth_id },
     })
     .then((newAuth_user) => {
       res.json(newAuth_user);
