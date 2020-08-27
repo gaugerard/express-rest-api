@@ -32,7 +32,6 @@ router.get("/:wipe_id", (req, res) => {
       models.message_chat
         .findAll({
           where: { id: l_msg_id },
-
           order: [["date", "ASC"]],
         })
         .then(function (rep) {
